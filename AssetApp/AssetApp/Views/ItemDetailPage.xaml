@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AssetCrossPlatformApp.Views.ItemDetailPage"
+             Title="{Binding Title}" >
+    <StackLayout Spacing="20" Padding="15">
+        <Label Text="Name:" FontSize="Medium" />
+        <Label Text="{Binding Item.Name}" FontSize="Small"/>
+        <Label Text="Type:" FontSize="Medium" />
+        <Label Text="{Binding Item.AssetTypeValue}" FontSize="Small"/>
+        <Label Text="SubType:" FontSize="Medium" />
+        <Label Text="{Binding Item.AssetSubTypeValue}" FontSize="Small"/>
+        <Label Text="Client ID:" FontSize="Medium" />
+        <Label Text="{Binding Item.ClientID}" FontSize="Small"/>
+        <Label Text="Lab Id:" FontSize="Medium" />
+        <Label Text="{Binding Item.LabID}" FontSize="Small"/>
+        <Label Text="Status:" FontSize="Medium" />
+        <Label Text="{Binding Item.Status}" FontSize="Small"/>
+        <Label Text="Last Service Date:" FontSize="Medium" />
+        <Label Text="{Binding Item.LastServiceDate}" FontSize="Small"/>
+        <Label Text="Next Service Date:" FontSize="Medium" />
+        <Label Text="{Binding Item.NextServiceDate}" FontSize="Small"/>
+        <Label Text="Notes:" FontSize="Medium" />
+        <Label Text="{Binding Item.Notes}" FontSize="Small"/>
+    </StackLayout>
+</ContentPage>
