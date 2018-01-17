@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:xForms="clr-namespace:Syncfusion.SfChart.XForms;assembly=Syncfusion.SfChart.XForms"
+             x:Class="AssetApp.Views.ChartsPage"
+              Title="{Binding Title}"
+             x:Name="ChartsViewPage">
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="1" Text="Refresh" Command="{Binding LoadItemsCommand}" FontSize="8"></Button>
+            </Grid>
+            <xForms:SfChart Grid.Row="1" Margin="5">
+                <xForms:SfChart.PrimaryAxis>
+                    <xForms:CategoryAxis>
+                        <xForms:CategoryAxis.Title>
+                            <xForms:ChartAxisTitle Text="Client Id"></xForms:ChartAxisTitle>
+                        </xForms:CategoryAxis.Title>
+                    </xForms:CategoryAxis>
+                </xForms:SfChart.PrimaryAxis>
+                <xForms:SfChart.SecondaryAxis>
+                    <xForms:NumericalAxis>
+                        <xForms:NumericalAxis.Title>
+                            <xForms:ChartAxisTitle Text="No. of Assets"></xForms:ChartAxisTitle>
+                        </xForms:NumericalAxis.Title>
+                    </xForms:NumericalAxis>
+                </xForms:SfChart.SecondaryAxis>
+                <xForms:SfChart.Series>
+                    <xForms:ColumnSeries ItemsSource="{Binding Items}" XBindingPath="ClientId" YBindingPath="AssetCount">
+                    </xForms:ColumnSeries>
+                </xForms:SfChart.Series>
+            </xForms:SfChart>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

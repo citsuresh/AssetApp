@@ -126,6 +126,11 @@ namespace AssetApp.Services
 
         public async Task<IEnumerable<Asset>> GetItemsAsync(bool forceRefresh = false)
         {
+            items.Clear();
+            var assets = GetAssetsByClient(string.Empty);
+            items = new List<Asset>();
+            items.AddRange(assets);
+
             return await Task.FromResult(items);
         }
     }

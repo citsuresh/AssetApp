@@ -14,7 +14,16 @@
                 <views1:ItemsPage />
             </x:Arguments>
         </NavigationPage>
-        
+        <NavigationPage Title="Charts">
+            <NavigationPage.Icon>
+                <OnPlatform x:TypeArguments="FileImageSource">
+                    <On Platform="iOS" Value="tab_charts.png"/>
+                </OnPlatform>
+            </NavigationPage.Icon>
+            <x:Arguments>
+                <views1:ChartsPage />
+            </x:Arguments>
+        </NavigationPage>
         <NavigationPage Title="About">
             <NavigationPage.Icon>
                 <OnPlatform x:TypeArguments="FileImageSource">
