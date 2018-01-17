@@ -1,8 +1,6 @@
-﻿using System;
+﻿using AssetApp.Models;
 
-using AssetCrossPlatformApp.Models;
-
-namespace AssetCrossPlatformApp.ViewModels
+namespace AssetApp.ViewModels
 {
     public class ItemDetailViewModel : BaseViewModel
     {

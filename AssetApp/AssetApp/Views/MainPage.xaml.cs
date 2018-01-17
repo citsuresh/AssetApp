@@ -1,9 +1,7 @@
-﻿using System;
-
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace AssetCrossPlatformApp.Views
+namespace AssetApp.Views
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class MainPage : TabbedPage

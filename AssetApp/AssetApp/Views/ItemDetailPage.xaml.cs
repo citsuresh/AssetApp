@@ -1,12 +1,9 @@
-﻿using System;
-
+﻿using AssetApp.Models;
+using AssetApp.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-using AssetCrossPlatformApp.Models;
-using AssetCrossPlatformApp.ViewModels;
-
-namespace AssetCrossPlatformApp.Views
+namespace AssetApp.Views
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class ItemDetailPage : ContentPage

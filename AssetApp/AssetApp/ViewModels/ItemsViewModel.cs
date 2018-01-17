@@ -2,13 +2,11 @@
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Threading.Tasks;
-
+using AssetApp.Models;
+using AssetApp.Views;
 using Xamarin.Forms;
 
-using AssetCrossPlatformApp.Models;
-using AssetCrossPlatformApp.Views;
-
-namespace AssetCrossPlatformApp.ViewModels
+namespace AssetApp.ViewModels
 {
     public class ItemsViewModel : BaseViewModel
     {

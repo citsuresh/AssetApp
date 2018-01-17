@@ -2,13 +2,11 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-
+using AssetApp.Models;
+using AssetApp.Services;
 using Xamarin.Forms;
 
-using AssetCrossPlatformApp.Models;
-using AssetCrossPlatformApp.Services;
-
-namespace AssetCrossPlatformApp.ViewModels
+namespace AssetApp.ViewModels
 {
     public class BaseViewModel : INotifyPropertyChanged
     {

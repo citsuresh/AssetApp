@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-            xmlns:views="clr-namespace:AssetCrossPlatformApp.Views"
-            x:Class="AssetCrossPlatformApp.Views.MainPage">
+            xmlns:views1="clr-namespace:AssetApp.Views;assembly=AssetApp"
+            x:Class="AssetApp.Views.MainPage">
     <TabbedPage.Children>
         <NavigationPage Title="Browse">
             <NavigationPage.Icon>
@@ -11,7 +11,7 @@
                 </OnPlatform>
             </NavigationPage.Icon>
             <x:Arguments>
-                <views:ItemsPage />
+                <views1:ItemsPage />
             </x:Arguments>
         </NavigationPage>
         
@@ -22,7 +22,7 @@
                 </OnPlatform>
             </NavigationPage.Icon>
             <x:Arguments>
-                <views:AboutPage />
+                <views1:AboutPage />
             </x:Arguments>
         </NavigationPage>
     </TabbedPage.Children>

@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
-using AssetAndroidApp;
-using AssetCrossPlatformApp.Models;
+using AssetApp.Models;
+using AssetApp.Services;
 
-[assembly: Xamarin.Forms.Dependency(typeof(AssetCrossPlatformApp.Services.MockDataStore))]
-namespace AssetCrossPlatformApp.Services
+[assembly: Xamarin.Forms.Dependency(typeof(MockDataStore))]
+namespace AssetApp.Services
 {
     public class MockDataStore : IDataStore<Asset>
     {
@@ -15,13 +13,14 @@ namespace AssetCrossPlatformApp.Services
 
         public MockDataStore()
         {
+            //Acr.UserDialogs.UserDialogs.Instance.ShowLoading("Loading text here...");
             var assets = GetAssetsByClient(string.Empty);
             //ThreadPool.QueueUserWorkItem(o => GetAssetsByClient(string.Empty));
 
             items = new List<Asset>();
 
             items.AddRange(assets);
-
+            //Acr.UserDialogs.UserDialogs.Instance.HideLoading();
             //var mockItems = new List<Item>
             //{
             //    new Item { Id = Guid.NewGuid().ToString(), Text = "First item", Description="This is an item description." },
@@ -83,10 +82,10 @@ namespace AssetCrossPlatformApp.Services
 
                 var assetsubtypeValue = RestServiceHelper.GetAssetSubType(item.AssetType, item.AssetSubType);
 
-                item.AssetTypeValue = string.Empty;
+                item.AssetSubTypeValue = string.Empty;
                 if (assetsubtypeValue != null)
                 {
-                    item.AssetTypeValue = assetsubtypeValue.AssetSubType1;
+                    item.AssetSubTypeValue = assetsubtypeValue.AssetSubType1;
                 }
 
                 assetlist.Add(item);

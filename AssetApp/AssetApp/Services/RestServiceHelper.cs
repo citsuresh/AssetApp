@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using AssetCrossPlatformApp.Models;
+using AssetApp.Models;
 using Newtonsoft.Json;
 
-namespace AssetAndroidApp
+namespace AssetApp.Services
 {
     /// <summary>
     /// Summary description for RestServiceHelper
@@ -19,7 +19,7 @@ namespace AssetAndroidApp
         public static async System.Threading.Tasks.Task PopulateAssetTypesSubTypesAsync()
         {
             HttpClient client = new HttpClient();
-            client.BaseAddress = new Uri(GetAssetByClientRestServiceAddress());
+            client.BaseAddress = new Uri(GetAssetWebApiRestServiceAddress());
 
             // Add an Accept header for JSON format.
             client.DefaultRequestHeaders.Accept.Add(
@@ -46,12 +46,80 @@ namespace AssetAndroidApp
             }
         }
 
+        public static async System.Threading.Tasks.Task<IEnumerable<string>> InvokeGetAllClientsAsync()
+        {
+            List<string> clientIds = new List<string>();
+            HttpClient client = new HttpClient();
+            client.BaseAddress = new Uri(GetAssetWebApiRestServiceAddress());
+
+            // Add an Accept header for JSON format.
+            client.DefaultRequestHeaders.Accept.Add(
+                new MediaTypeWithQualityHeaderValue("application/json"));
+
+            var requestUri = "clients";
+
+            HttpResponseMessage response = client.GetAsync(requestUri).Result;
+
+            if (response.IsSuccessStatusCode)
+            {
+                string json = await response.Content.ReadAsStringAsync();
+                clientIds.AddRange(JsonConvert.DeserializeObject<IEnumerable<string>>(json));
+            }
+
+            return clientIds;
+        }
+
+        public static async System.Threading.Tasks.Task<IEnumerable<AssetType>> InvokeGetAllAssetTypesAsync()
+        {
+            List<AssetType> assetTypes = new List<AssetType>();
+            HttpClient client = new HttpClient();
+            client.BaseAddress = new Uri(GetAssetWebApiRestServiceAddress());
+
+            // Add an Accept header for JSON format.
+            client.DefaultRequestHeaders.Accept.Add(
+                new MediaTypeWithQualityHeaderValue("application/json"));
+
+            var requestUri = "assettypes";
+
+            HttpResponseMessage response = client.GetAsync(requestUri).Result;
+
+            if (response.IsSuccessStatusCode)
+            {
+                string json = await response.Content.ReadAsStringAsync();
+                assetTypes.AddRange(JsonConvert.DeserializeObject<IEnumerable<AssetType>>(json));
+            }
+
+            return assetTypes;
+        }
+
+        public static async System.Threading.Tasks.Task<IEnumerable<AssetSubType>> InvokeGetAllAssetSubTypesAsync()
+        {
+            List<AssetSubType> assetSubTypes = new List<AssetSubType>();
+            HttpClient client = new HttpClient();
+            client.BaseAddress = new Uri(GetAssetWebApiRestServiceAddress());
+
+            // Add an Accept header for JSON format.
+            client.DefaultRequestHeaders.Accept.Add(
+                new MediaTypeWithQualityHeaderValue("application/json"));
+
+            var requestUri = "assetsubtypes";
+
+            HttpResponseMessage response = client.GetAsync(requestUri).Result;
+
+            if (response.IsSuccessStatusCode)
+            {
+                string json = await response.Content.ReadAsStringAsync();
+                assetSubTypes.AddRange(JsonConvert.DeserializeObject<IEnumerable<AssetSubType>>(json));
+            }
+
+            return assetSubTypes;
+        }
 
         public static async System.Threading.Tasks.Task<Dictionary<string, IEnumerable<Asset>>> InvokeGetByClientAsync(string clientId = "")
         {
             Dictionary<string, IEnumerable<Asset>> assetCountersByClient = new Dictionary<string, IEnumerable<Asset>>();
             HttpClient client = new HttpClient();
-            client.BaseAddress = new Uri(GetAssetByClientRestServiceAddress());
+            client.BaseAddress = new Uri(GetAssetWebApiRestServiceAddress());
 
             // Add an Accept header for JSON format.
             client.DefaultRequestHeaders.Accept.Add(
@@ -214,7 +282,7 @@ namespace AssetAndroidApp
             return restServiceBaseAddress;
         }
 
-        private static string GetAssetByClientRestServiceAddress()
+        private static string GetAssetWebApiRestServiceAddress()
         {
 
             var restServiceAddress = "https://assetdbwebapi.azurewebsites.net/api/";

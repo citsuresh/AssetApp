@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-
+using AssetApp.Models;
+using AssetApp.Services;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-using AssetCrossPlatformApp.Models;
-
-namespace AssetCrossPlatformApp.Views
+namespace AssetApp.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class NewItemPage : ContentPage
@@ -17,13 +15,27 @@ namespace AssetCrossPlatformApp.Views
         {
             InitializeComponent();
 
-            Item = new Asset
-            {
-                Text = "Item name",
-                Description = "This is an item description."
-            };
+            Item = new Asset();
 
             BindingContext = this;
+
+            var allclients = RestServiceHelper.InvokeGetAllClientsAsync();
+            foreach (var client in allclients.Result)
+            {
+                this.ClientIdPicker.Items.Add(client);
+            }
+
+            var allAssetTypes = RestServiceHelper.InvokeGetAllAssetTypesAsync();
+            foreach (var assetType in allAssetTypes.Result)
+            {
+                this.AssetTypePicker.Items.Add(assetType.AssetType1);
+            }
+
+            var allAssetSubTypes = RestServiceHelper.InvokeGetAllAssetSubTypesAsync();
+            foreach (var assetSubType in allAssetSubTypes.Result)
+            {
+                this.AssetSubTypePicker.Items.Add(assetSubType.AssetSubType1);
+            }
         }
 
         async void Save_Clicked(object sender, EventArgs e)

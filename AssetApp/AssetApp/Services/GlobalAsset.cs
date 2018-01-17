@@ -1,6 +1,6 @@
     using System;
 
-namespace AssetAndroidApp
+namespace AssetApp.Services
 {
     public partial class GlobalAsset
     {

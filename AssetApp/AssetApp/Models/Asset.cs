@@ -8,9 +8,8 @@
 //------------------------------------------------------------------------------
 
 using System;
-using System.Collections.Generic;
 
-namespace AssetCrossPlatformApp.Models
+namespace AssetApp.Models
 {
     public partial class Asset
     {

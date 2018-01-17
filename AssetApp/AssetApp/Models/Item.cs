@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace AssetCrossPlatformApp.Models
+namespace AssetApp.Models
 {
     public class Item
     {

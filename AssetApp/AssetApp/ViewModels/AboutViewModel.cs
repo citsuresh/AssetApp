@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Windows.Input;
-
 using Xamarin.Forms;
 
-namespace AssetCrossPlatformApp.ViewModels
+namespace AssetApp.ViewModels
 {
     public class AboutViewModel : BaseViewModel
     {

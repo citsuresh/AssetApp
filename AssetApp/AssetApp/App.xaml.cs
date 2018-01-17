@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using AssetApp.Views;
 using Xamarin.Forms;
 
 namespace AssetApp
@@ -13,7 +13,7 @@ namespace AssetApp
 		{
 			InitializeComponent();
 
-			MainPage = new AssetApp.MainPage();
+			MainPage = new MainPage();
 		}
 
 		protected override void OnStart ()

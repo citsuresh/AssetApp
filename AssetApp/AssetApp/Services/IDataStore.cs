@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace AssetCrossPlatformApp.Services
+namespace AssetApp.Services
 {
     public interface IDataStore<T>
     {
