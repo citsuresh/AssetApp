@@ -6,39 +6,79 @@
               Title="{Binding Title}"
              x:Name="ChartsViewPage">
     <ContentPage.Content>
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="30" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-            <Grid Grid.Row="0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-                <Button Grid.Column="1" Text="Refresh" Command="{Binding LoadItemsCommand}" FontSize="8"></Button>
+        <ScrollView>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="200" />
+                    <RowDefinition Height="200" />
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Column="1" Text="Refresh" Command="{Binding LoadItemsCommand}" FontSize="8"></Button>
+                </Grid>
+
+                <xForms:SfChart Grid.Row="1" Margin="5">
+                    <xForms:SfChart.Title>
+                        <xForms:ChartTitle Text="Assets by Lab" TextColor="Blue"/>
+                    </xForms:SfChart.Title>
+                    <xForms:SfChart.PrimaryAxis>
+                        <xForms:CategoryAxis>
+                            <xForms:CategoryAxis.Title>
+                                <xForms:ChartAxisTitle Text="Lab Id"></xForms:ChartAxisTitle>
+                            </xForms:CategoryAxis.Title>
+                        </xForms:CategoryAxis>
+                    </xForms:SfChart.PrimaryAxis>
+                    <xForms:SfChart.SecondaryAxis>
+                        <xForms:NumericalAxis>
+                            <xForms:NumericalAxis.Title>
+                                <xForms:ChartAxisTitle Text="No. of Assets"></xForms:ChartAxisTitle>
+                            </xForms:NumericalAxis.Title>
+                        </xForms:NumericalAxis>
+                    </xForms:SfChart.SecondaryAxis>
+                    <xForms:SfChart.Series>
+                        <xForms:ColumnSeries ItemsSource="{Binding LabAssetChartItems}" XBindingPath="LabId" YBindingPath="AssetCount"/>
+                    </xForms:SfChart.Series>
+                </xForms:SfChart>
+
+                <xForms:SfChart Grid.Row="2" Margin="5">
+                    <xForms:SfChart.Title>
+                        <xForms:ChartTitle Text="Assets by Type" TextColor="Blue"/>
+                    </xForms:SfChart.Title>
+
+                    <xForms:SfChart.Legend>
+                        <xForms:ChartLegend/>
+                    </xForms:SfChart.Legend>
+                    <xForms:PieSeries ItemsSource="{Binding AssetByAssetTypeChartItems}" XBindingPath="AssetType" 
+                                                                          YBindingPath="AssetCount" DataMarkerPosition="OutsideExtended" >
+                        <xForms:PieSeries.DataMarker>
+                            <xForms:ChartDataMarker LabelContent="Percentage" />
+                        </xForms:PieSeries.DataMarker>
+                    </xForms:PieSeries>
+                    <!--<xForms:SfChart.PrimaryAxis>
+                        <xForms:CategoryAxis>
+                            <xForms:CategoryAxis.Title>
+                                <xForms:ChartAxisTitle Text="Asset Type"></xForms:ChartAxisTitle>
+                            </xForms:CategoryAxis.Title>
+                        </xForms:CategoryAxis>
+                    </xForms:SfChart.PrimaryAxis>
+                    <xForms:SfChart.SecondaryAxis>
+                        <xForms:NumericalAxis>
+                            <xForms:NumericalAxis.Title>
+                                <xForms:ChartAxisTitle Text="No. of Assets"></xForms:ChartAxisTitle>
+                            </xForms:NumericalAxis.Title>
+                        </xForms:NumericalAxis>
+                    </xForms:SfChart.SecondaryAxis>
+                    <xForms:SfChart.Series>
+                        <xForms:ColumnSeries ItemsSource="{Binding AssetByAssetTypeChartItems}" XBindingPath="AssetType" YBindingPath="AssetCount"/>
+                    </xForms:SfChart.Series>-->
+                </xForms:SfChart>
             </Grid>
-            <xForms:SfChart Grid.Row="1" Margin="5">
-                <xForms:SfChart.PrimaryAxis>
-                    <xForms:CategoryAxis>
-                        <xForms:CategoryAxis.Title>
-                            <xForms:ChartAxisTitle Text="Client Id"></xForms:ChartAxisTitle>
-                        </xForms:CategoryAxis.Title>
-                    </xForms:CategoryAxis>
-                </xForms:SfChart.PrimaryAxis>
-                <xForms:SfChart.SecondaryAxis>
-                    <xForms:NumericalAxis>
-                        <xForms:NumericalAxis.Title>
-                            <xForms:ChartAxisTitle Text="No. of Assets"></xForms:ChartAxisTitle>
-                        </xForms:NumericalAxis.Title>
-                    </xForms:NumericalAxis>
-                </xForms:SfChart.SecondaryAxis>
-                <xForms:SfChart.Series>
-                    <xForms:ColumnSeries ItemsSource="{Binding Items}" XBindingPath="ClientId" YBindingPath="AssetCount">
-                    </xForms:ColumnSeries>
-                </xForms:SfChart.Series>
-            </xForms:SfChart>
-        </Grid>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

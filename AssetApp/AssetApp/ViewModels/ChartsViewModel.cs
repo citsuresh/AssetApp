@@ -13,14 +13,22 @@ namespace AssetApp.ViewModels
 {
     public class ChartsViewModel : BaseViewModel
     {
-        public ObservableCollection<ClientAsset> Items { get; set; }
+        public ObservableCollection<ClientAssetChartData> ClientAssetChartItems { get; set; } 
+        public ObservableCollection<LabAssetChartData> LabAssetChartItems { get; set; }
+
+        public ObservableCollection<AssetByAssetTypeChartData> AssetByAssetTypeChartItems { get; set; }
+        
+
 
         public Command LoadItemsCommand { get; set; }
 
         public ChartsViewModel()
         {
             Title = "Charts";
-            Items = new ObservableCollection<ClientAsset>();
+            ClientAssetChartItems = new ObservableCollection<ClientAssetChartData>();
+            LabAssetChartItems = new ObservableCollection<LabAssetChartData>();
+            AssetByAssetTypeChartItems = new ObservableCollection<AssetByAssetTypeChartData>();
+
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
         }
 
@@ -33,12 +41,25 @@ namespace AssetApp.ViewModels
 
             try
             {
-                Items.Clear();
-                var assetsGroupedByClient = RestServiceHelper.InvokeGetByClientAsync().Result;
-                
+                //ClientAssetChartItems.Clear();
+                //var assetsGroupedByClient = RestServiceHelper.InvokeGetByClientAsync().Result;
+                //foreach (var item in assetsGroupedByClient)
+                //{
+                //    ClientAssetChartItems.Add(new ClientAssetChartData{ClientId = item.Key , AssetCount = item.Value.Count()});
+                //}
+
+                LabAssetChartItems.Clear();
+                var assetsGroupedByClient = RestServiceHelper.InvokeGetByLabAsync().Result;
                 foreach (var item in assetsGroupedByClient)
                 {
-                    Items.Add(new ClientAsset{ClientId = item.Key , AssetCount = item.Value.Count()});
+                    LabAssetChartItems.Add(new LabAssetChartData { LabId = item.Key, AssetCount = item.Value.Count() });
+                }
+
+                AssetByAssetTypeChartItems.Clear();
+                var assetsGroupedByAssetType = RestServiceHelper.InvokeGetByAssetTypeAsync().Result;
+                foreach (var item in assetsGroupedByAssetType)
+                {
+                    AssetByAssetTypeChartItems.Add(new AssetByAssetTypeChartData { AssetType = item.Key, AssetCount = item.Value.Count() });
                 }
             }
             catch (Exception ex)
@@ -50,11 +71,5 @@ namespace AssetApp.ViewModels
                 IsBusy = false;
             }
         }
-    }
-
-    public class ClientAsset
-    {
-        public string ClientId { get; set; }
-        public int AssetCount { get; set; }
     }
 }

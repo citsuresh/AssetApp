@@ -47,7 +47,7 @@ namespace AssetApp.Services
                 Dictionary<string, IEnumerable<Asset>> result = RestServiceHelper.InvokeGetByClientAsync().Result;
                 foreach (var resultValue in result.Values)
                 {
-                    assetlist.AddRange(PopulateAssetList(resultValue));
+                    assetlist.AddRange(resultValue);
                 }
 
                 //ShowOnUIThread("Number of assets for all clients is " + assets.Count);
@@ -58,7 +58,7 @@ namespace AssetApp.Services
                 var result = RestServiceHelper.InvokeGetByClientAsync(clientId).Result;
                 if (result.ContainsKey(clientId))
                 {
-                    assetlist.AddRange(PopulateAssetList(result[clientId]));
+                    assetlist.AddRange(result[clientId]);
                 }
 
                 //ShowOnUIThread("Number of assets for client '" + clientId + "' is " + assetlist.Count);
@@ -66,34 +66,6 @@ namespace AssetApp.Services
 
             return assetlist;
         }
-
-        private static List<Asset> PopulateAssetList(IEnumerable<Asset> resultValues)
-        {
-            List<Asset> assetlist = new List<Asset>();
-            foreach (var item in resultValues)
-            {
-                var assettypeValue = RestServiceHelper.GetAssetType(item.AssetType);
-
-                item.AssetTypeValue = string.Empty;
-                if (assettypeValue != null)
-                {
-                    item.AssetTypeValue = assettypeValue.AssetType1;
-                }
-
-                var assetsubtypeValue = RestServiceHelper.GetAssetSubType(item.AssetType, item.AssetSubType);
-
-                item.AssetSubTypeValue = string.Empty;
-                if (assetsubtypeValue != null)
-                {
-                    item.AssetSubTypeValue = assetsubtypeValue.AssetSubType1;
-                }
-
-                assetlist.Add(item);
-            }
-
-            return assetlist;
-        }
-
 
         public async Task<bool> AddItemAsync(Asset item)
         {
